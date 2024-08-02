@@ -3,11 +3,16 @@ package com.speria.vinicius.taskManagementApi.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +23,4 @@ public class Task {
     private LocalDateTime createdAt;
     private LocalDateTime completedAt;
     private String priority;
-
-    // Getters e Setters
 }
