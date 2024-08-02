@@ -1,7 +1,5 @@
 # Task Management API
 
-![Task Management API](https://via.placeholder.com/728x90.png)
-
 Welcome to the **Task Management API** project! This modern backend application is designed with Spring Boot to provide a robust and scalable API for managing tasks. 🚀
 
 ## 🌟 Features
@@ -25,8 +23,6 @@ Welcome to the **Task Management API** project! This modern backend application 
 ## 🎯 Objective
 
 The primary goal of this project is to showcase backend development skills, RESTful API implementation, and best practices in security and documentation. It serves as a proof of concept for task management solutions, making it ideal for integration into larger projects or as a reference for technical interviews and assessments.
-
-![API Workflow](https://via.placeholder.com/728x90.png)
 
 ## Getting Started
 
