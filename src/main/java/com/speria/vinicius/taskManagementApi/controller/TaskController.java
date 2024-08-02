@@ -4,13 +4,13 @@ import com.speria.vinicius.taskManagementApi.model.Task;
 import com.speria.vinicius.taskManagementApi.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -29,12 +29,12 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task) {
+    public Task createTask(@Valid @RequestBody Task task) {
         return taskService.save(task);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task taskDetails) {
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid @RequestBody Task taskDetails) {
         Optional<Task> taskOptional = taskService.findById(id);
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
