@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 class TaskServiceTest {
 
     @Mock
@@ -32,26 +32,24 @@ class TaskServiceTest {
         task1 = new Task();
         task1.setId(1L);
         task1.setTitle("Task 1");
-        task1.setDescription("Description 1");
-        task1.setStatus("Pending");
-        task1.setPriority("High");
 
         task2 = new Task();
         task2.setId(2L);
         task2.setTitle("Task 2");
-        task2.setDescription("Description 2");
-        task2.setStatus("Completed");
-        task2.setPriority("Low");
     }
 
     @Test
-    void testFindAll() {
-        when(taskRepository.findAll()).thenReturn(Arrays.asList(task1, task2));
+    void testFindAllWithPaginationAndSorting() {
+        Pageable pageable = PageRequest.of(0, 1, Sort.by("title").ascending());
+        Page<Task> page = new PageImpl<>(Arrays.asList(task1), pageable, 2);
 
-        List<Task> tasks = taskService.findAll();
+        when(taskRepository.findAll(pageable)).thenReturn(page);
 
-        assertEquals(2, tasks.size());
-        verify(taskRepository, times(1)).findAll();
+        Page<Task> result = taskService.findAll(pageable);
+
+        assertEquals(1, result.getContent().size());
+        assertEquals("Task 1", result.getContent().get(0).getTitle());
+        verify(taskRepository, times(1)).findAll(pageable);
     }
 
     @Test
@@ -63,7 +61,6 @@ class TaskServiceTest {
         assertEquals("Task 1", savedTask.getTitle());
         verify(taskRepository, times(1)).save(task1);
     }
-
     @Test
     void testFindById() {
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task1));
