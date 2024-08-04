@@ -2,6 +2,7 @@ package com.speria.vinicius.taskManagementApi.controller;
 
 import com.speria.vinicius.taskManagementApi.model.Task;
 import com.speria.vinicius.taskManagementApi.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
